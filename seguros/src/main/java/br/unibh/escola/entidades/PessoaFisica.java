@@ -2,10 +2,27 @@ package br.unibh.escola.entidades;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tb_pessoa_fisica")
 public class PessoaFisica {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long Id;
+	
+	@Column (length=100, nullable=false)
 	private String nome;
+	
+	@Column (columnDefinition="CHAR(11)", nullable=false, unique=true)
 	private String cpf;
+	
 	private String telefoneComercial;
 	private String telefoneResidencial;
 	private String telefoneCelular;
