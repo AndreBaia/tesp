@@ -1,4 +1,4 @@
-package br.unibh.escola.entidades;
+package br.unibh.seguros.entidades;
 
 import java.util.Collection;
 

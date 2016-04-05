@@ -1,22 +1,54 @@
-package br.unibh.escola.entidades;
+package br.unibh.seguros.entidades;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tb_endereco")
 public class Endereco {
-	private Long Id;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(length=30, nullable=false)
 	private String tipo;
+	
+	@Column(columnDefinition="CHAR(8)", nullable=false)
 	private String cep;
+	
+	@Column(name="tipo_logradouro", length=30, nullable=false)
 	private String tipoLogradouro;
+	
+	@Column(length=150, nullable=false)
 	private String logradouro;
+	
+	@Column(length=30, nullable=false)
 	private String numero;
+	
+	@Column(length=100)
 	private String complemento;
+	
+	@Column(length=100, nullable=false)
 	private String cidade;
+	
+	@Column(columnDefinition="CHAR(2)", nullable=false)
 	private String estado;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Proponente proponente; 
 	
 	public Long getId() {
-		return Id;
+		return id;
 	}
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getTipo() {
 		return tipo;
@@ -66,7 +98,4 @@ public class Endereco {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
-	
 }
