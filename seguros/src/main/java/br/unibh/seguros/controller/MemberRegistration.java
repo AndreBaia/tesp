@@ -16,7 +16,7 @@ import br.unibh.seguros.model.Member;
 // The @Stateful annotation eliminates the need for manual transaction demarcation
 @Stateful
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
-// EL name
+// EL namesdfsdfs
 // Read more about the @Model stereotype in this FAQ:
 // http://sfwk.org/Documentation/WhatIsThePurposeOfTheModelAnnotation
 @Model
