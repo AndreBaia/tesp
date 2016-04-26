@@ -12,29 +12,55 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="tb_usuario")
+
 public class Usuario {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
+	@Size(min = 8, max = 15)
+	@Pattern (regexp = "[A-z0-9]*")
 	@Column (length=15, nullable=false,unique=true)
 	private String login;
 	
+	@NotBlank
+	@Size(min = 8, max = 15)
 	@Column (length=100, nullable=false)
 	private String senha;
 	
+	@NotNull
+	@Size(min = 5, max = 100)
+	@Pattern(regexp = "[A-zÀ-ú ]*" , message = "Deve conter apenas letras e espaços")
 	@Column (length=100, nullable=false)
 	private String nome;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Size(min = 5, max = 100)
 	@Column (length=30, nullable=false)
 	private String perfil;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Size(min = 5, max = 100)	
 	@Column (length=100, nullable=false)
 	private String cargo;
 	
+	@NotBlank
+	@Email
+	@Size(max = 100)
+
 	@Column (length=100, nullable=false)
 	private String email;
 	

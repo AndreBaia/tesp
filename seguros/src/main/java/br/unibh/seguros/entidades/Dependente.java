@@ -8,16 +8,30 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import br.unibh.seguros.util.CharacterToBooleanUtil;
+
 
 @Entity
 @Table(name="tb_dependente")@PrimaryKeyJoinColumn
 public class Dependente extends PessoaFisica {
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]*")
+	@Max(30)
 	@Column (name="grau_parentesco",length=30, nullable=false)
 	private String grauParentesco;
 	
+	@NotNull
+	@DecimalMin("0.00")
+	@DecimalMax ("100.00")
 	@Column (name="percentual_beneficio",columnDefinition="DECIMAL(30)", nullable=false)
 	private BigDecimal percentualBeneficio;
 	

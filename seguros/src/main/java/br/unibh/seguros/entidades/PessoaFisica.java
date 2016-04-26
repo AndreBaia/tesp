@@ -12,6 +12,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="tb_pessoa_fisica")
@@ -22,27 +30,43 @@ public class PessoaFisica {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long id;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Size(min = 5, max = 100)
 	@Column (length=100, nullable=false)
 	private String nome;
 	
+	@NotBlank
+	@Size(min = 11, max = 11)
+	@Pattern(regexp = "[0-9]*")
 	@Column (length=11, nullable=false,unique=true)
 	private String cpf;
 	
+	@Pattern(regexp = "\\(\\d{2}\\)\\d{4}-\\d{4}")
 	@Column (name="telefone_comercial",length=14)
 	private String telefoneComercial;
 	
+	@NotBlank
+	@Pattern(regexp = "\\(\\d{2}\\)\\d{4}-\\d{4}")
 	@Column (name="telefone_residencial",length=14)
 	private String telefoneResidencial;
 	
+	@Pattern(regexp = "\\(\\d{2}\\)\\d{4}-\\d{4}")
 	@Column (name="telefone_celular",length=14)
 	private String telefoneCelular;
 	
+	@Email
+	@Size(max = 100)
 	@Column (length=100)
 	private String email;
 	
+	@Min(18)
+	@Max(99)
 	@Column (nullable=false)
 	private int idade; 
 	
+	@NotBlank
+	@Past
 	@Column (name="data_nascimento", nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;

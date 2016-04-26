@@ -10,11 +10,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name="tb_proponente")
 public class Proponente extends PessoaFisica{
 
-
+	@NotBlank
+	@Pattern (regexp = "[0-9]*")
+	@Size (min = 5, max = 8)
 	@Column(columnDefinition="char(8)", nullable=false)
 	private String matricula;
 	
@@ -22,9 +29,15 @@ public class Proponente extends PessoaFisica{
 	@Column(name="data_cadastro", nullable=false)
 	private Date dataCadastro;
 	
+	@NotBlank
+	@Pattern (regexp = "[A-zÁ-ú ]*")
+	@Max(30)
 	@Column(name="situacao_cadastro", nullable=false, length=30)
 	private String situacaoCadastro;
 	
+	@NotBlank
+	@Pattern (regexp = "[A-zÁ-ú ]*")
+	@Max(30)
 	@Column(nullable=false, length=30)
 	private String status;
 	

@@ -8,6 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="tb_endereco")
@@ -17,27 +22,48 @@ public class Endereco {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(30)	
 	@Column(length=30, nullable=false)
 	private String tipo;
 	
+	@NotBlank
+	@Pattern(regexp = "[0123456789]")
+	@Size(min = 8, max = 8)
 	@Column(columnDefinition="CHAR(8)", nullable=false)
 	private String cep;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(30)
 	@Column(name="tipo_logradouro", length=30, nullable=false)
 	private String tipoLogradouro;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(150)
 	@Column(length=150, nullable=false)
 	private String logradouro;
 	
+	@NotBlank
+	@Max(30)
 	@Column(length=30, nullable=false)
 	private String numero;
 	
+	@Max(100)
 	@Column(length=100)
 	private String complemento;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(100)
 	@Column(length=100, nullable=false)
 	private String cidade;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Size(min = 2, max = 2)
 	@Column(columnDefinition="CHAR(2)", nullable=false)
 	private String estado;
 	

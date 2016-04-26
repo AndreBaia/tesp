@@ -17,6 +17,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="tb_proposta")
@@ -30,41 +38,68 @@ public class Proposta {
 	@Column(nullable=false)
 	private Date data;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(30)
 	@Column(name="tipo_segurado", length=30, nullable=false)
     private String tipoSegurado;
 	
+	@NotNull
+	@DecimalMin("1000.00")
+	@DecimalMax("10000000.00")
 	@Column(name="valor_segurado", columnDefinition="DECIMAL(14,2)", nullable=false)
     private BigDecimal valorSegurado;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-Z]")
+	@Size(min = 1, max = 1)
 	@Column(columnDefinition="char(1)", nullable=false)
     private String classe;
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name="data_inicio_vigencia", nullable=false)
     private Date dataInicioVigencia;
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name="data_termino_vigencia", nullable=false)
     private Date dataTerminoVigencia;
 	
+	@NotNull
+	@Size(min = 0, max = 24)
 	@Column(name="carencia_em_meses", columnDefinition="int", nullable=false)
     private Integer carenciaEmMeses;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(30)
 	@Column(name="situacao_atual", length=30, nullable=false)
     private String situacaoAtual;
 	
+	@NotBlank
+	@DecimalMin("100.00")
+	@DecimalMax("100000.00")
 	@Column(name="valor_premio", columnDefinition="DECIMAL(14,2)", nullable=false)
     private BigDecimal valorPremio;
 	
+	@NotNull
+	@Size(min = 1, max = 31)
 	@Column(name="dia_pagamento", columnDefinition="int", nullable=false)
     private Integer diaPagamento;
 	
+	@NotBlank
+	@Max(50)
 	@Column(name="banco_pagamento", length=80, nullable=false)
     private String bancoPagamento;
 	
+	@NotBlank
+	@Max(15)
 	@Column(length=15, nullable=false)
     private String agencia;
 	
+	@NotBlank
+	@Max(15)
 	@Column(length=15, nullable=false)
     private String conta;
 	

@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="tb_tramitacao")
@@ -23,22 +27,37 @@ public class Tramitacao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(30)
 	@Column (name="etapa_processo",length=30, nullable=false)
 	private String etapaProcesso;
+	
 	
 	@Column(name="data_hora", nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataHora;
-
+	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(50)
 	@Column (name="situacao_inicial",length=50, nullable=false)
 	private String situacaoInicial;
-
+	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(50)
 	@Column (name="situacao_final",length=50, nullable=false)
 	private String situacaoFinal;
-
+	
+	@NotBlank
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(100)
 	@Column (name="tipo_decisao",length=100, nullable=false)
 	private String tipoDecisao;
-
+	
+	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Max(4000)
 	@Column (columnDefinition="TEXT(4000)", nullable=false)
 	private String comentario;
 
