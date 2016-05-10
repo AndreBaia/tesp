@@ -1,5 +1,6 @@
 package br.unibh.seguros.entidades;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -18,14 +19,34 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="tb_setor")
-public class Setor {
+public class Setor implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public Setor() {
+		
+	}
+	
+
+	public Setor(Long id, String nome, Collection<Setor> setoresInferiores, Setor setorSuperior,
+			Collection<Usuario> mebros) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.setoresInferiores = setoresInferiores;
+		this.setorSuperior = setorSuperior;
+		this.mebros = mebros;
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
 	@Size(min = 3, max = 150)
-	@Pattern(regexp = "[A-zÀ-ú]*", message = "Deve conter apenas letras e espaços")
+	@Pattern(regexp = "[A-zÁ-ú ]*", message = "Deve conter apenas letras e espaços")
 	@Column (length=150, nullable=false,unique=true)
 	private String nome;
 	

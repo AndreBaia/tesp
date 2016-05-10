@@ -20,7 +20,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -38,7 +37,7 @@ import br.unibh.seguros.entidades.Tramitacao;
 import br.unibh.seguros.entidades.Vinculo;
 import br.unibh.seguros.util.Resources;
 
-@Ignore
+
 @RunWith(Arquillian.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TesteUsuario {

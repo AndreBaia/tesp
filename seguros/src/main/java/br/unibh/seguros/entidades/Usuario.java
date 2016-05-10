@@ -60,18 +60,18 @@ public class Usuario implements Serializable {
 
 	@NotNull
 	@Size(min = 5, max = 100)
-	@Pattern(regexp = "[A-zÀ-ú ]*", message = "Deve conter apenas letras e espaços")
+	@Pattern(regexp = "[A-zÁ-ú ]*", message = "Deve conter apenas letras e espaços")
 	@Column(length = 100, nullable = false)
 	private String nome;
 
 	@NotBlank
-	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Pattern(regexp = "[A-zÁ-ú ]*")
 	@Size(min = 5, max = 100)
 	@Column(length = 30, nullable = false)
 	private String perfil;
 
 	@NotBlank
-	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Pattern(regexp = "[A-zÁ-ú ]*")
 	@Size(min = 5, max = 100)
 	@Column(length = 100, nullable = false)
 	private String cargo;
