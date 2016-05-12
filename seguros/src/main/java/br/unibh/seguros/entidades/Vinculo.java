@@ -1,5 +1,6 @@
 package br.unibh.seguros.entidades;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
@@ -25,7 +27,23 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="tb_vinculo")
-public class Vinculo {
+public class Vinculo implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Version
+	@Column(columnDefinition="bigint NOT NULL DEFAULT 0")
+	private Long version;
+	public Long getVersion() {
+	return version;
+	}
+	public void setVersion(Long version) {
+	this.version = version;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -146,5 +164,90 @@ public class Vinculo {
 	public void setEmailReferencia(String emailReferencia) {
 		this.emailReferencia = emailReferencia;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cargo == null) ? 0 : cargo.hashCode());
+		result = prime * result + ((dataAte == null) ? 0 : dataAte.hashCode());
+		result = prime * result + ((dataDesde == null) ? 0 : dataDesde.hashCode());
+		result = prime * result + ((emailReferencia == null) ? 0 : emailReferencia.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((pessoaReferencia == null) ? 0 : pessoaReferencia.hashCode());
+		result = prime * result + ((proponente == null) ? 0 : proponente.hashCode());
+		result = prime * result + ((salario == null) ? 0 : salario.hashCode());
+		result = prime * result + ((telefoneReferencia == null) ? 0 : telefoneReferencia.hashCode());
+		result = prime * result + ((tipoVinculo == null) ? 0 : tipoVinculo.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vinculo other = (Vinculo) obj;
+		if (cargo == null) {
+			if (other.cargo != null)
+				return false;
+		} else if (!cargo.equals(other.cargo))
+			return false;
+		if (dataAte == null) {
+			if (other.dataAte != null)
+				return false;
+		} else if (!dataAte.equals(other.dataAte))
+			return false;
+		if (dataDesde == null) {
+			if (other.dataDesde != null)
+				return false;
+		} else if (!dataDesde.equals(other.dataDesde))
+			return false;
+		if (emailReferencia == null) {
+			if (other.emailReferencia != null)
+				return false;
+		} else if (!emailReferencia.equals(other.emailReferencia))
+			return false;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (pessoaReferencia == null) {
+			if (other.pessoaReferencia != null)
+				return false;
+		} else if (!pessoaReferencia.equals(other.pessoaReferencia))
+			return false;
+		if (proponente == null) {
+			if (other.proponente != null)
+				return false;
+		} else if (!proponente.equals(other.proponente))
+			return false;
+		if (salario == null) {
+			if (other.salario != null)
+				return false;
+		} else if (!salario.equals(other.salario))
+			return false;
+		if (telefoneReferencia == null) {
+			if (other.telefoneReferencia != null)
+				return false;
+		} else if (!telefoneReferencia.equals(other.telefoneReferencia))
+			return false;
+		if (tipoVinculo == null) {
+			if (other.tipoVinculo != null)
+				return false;
+		} else if (!tipoVinculo.equals(other.tipoVinculo))
+			return false;
+		return true;
+	}
+	
+	
 	
 }
