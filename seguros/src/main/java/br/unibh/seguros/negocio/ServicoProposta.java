@@ -54,7 +54,7 @@ public class ServicoProposta implements DAO<Proposta, Long> {
 	@Override
 	public List<Proposta> findByName(String name) throws Exception {
 		log.info("Encontrando o" + name);
-		return em.createNamedQuery("Proposta.findByName").setParameter("nome", name + "%").getResultList();
+		return em.createNamedQuery("Proposta.findByName").setParameter("id", name + "%").getResultList();
 	}
 
 }

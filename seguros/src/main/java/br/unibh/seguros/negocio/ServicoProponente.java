@@ -54,7 +54,7 @@ public class ServicoProponente implements DAO<Proponente, Long> {
 	@Override
 	public List<Proponente> findByName(String name) throws Exception {
 		log.info("Encontrando o" + name);
-		return em.createNamedQuery("Proponente.findByName").setParameter("nome", name + "%").getResultList();
+		return em.createNamedQuery("Proponente.findByName").setParameter("matricula", name + "%").getResultList();
 	}
 
 }

@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_proponente")
-@NamedQueries({ @NamedQuery(name = "Proponente.findByName", query = "select o from Proponente o where o.nome like :nome") })
+@NamedQueries({ @NamedQuery(name = "Proponente.findByName", query = "select o from Proponente o where o.matricula like :matricula") })
 
 public class Proponente extends PessoaFisica implements Serializable {
 

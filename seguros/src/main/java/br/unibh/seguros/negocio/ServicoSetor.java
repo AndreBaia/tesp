@@ -47,7 +47,7 @@ public class ServicoSetor implements DAO<Setor, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Setor> findAll() throws Exception {
-		log.info("Encontrando todos os setors");
+		log.info("Encontrando todos os setores");
 		return em.createQuery("from Setor").getResultList();
 	}
 
