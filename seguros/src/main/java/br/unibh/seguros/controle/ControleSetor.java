@@ -1,4 +1,4 @@
-package br.unibh.seguros.controller;
+package br.unibh.seguros.controle;
 
 import java.util.List;
 import java.util.logging.Logger;
