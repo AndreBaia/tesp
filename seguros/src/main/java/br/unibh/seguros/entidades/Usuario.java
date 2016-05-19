@@ -1,6 +1,7 @@
 package br.unibh.seguros.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -103,6 +105,17 @@ public class Usuario implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Setor setor;
 
+	@OneToMany(mappedBy="proposta", fetch=FetchType.LAZY)
+    private Collection<Tramitacao> tramitacoes;
+	
+	
+	
+	public Collection<Tramitacao> getTramitacoes() {
+		return tramitacoes;
+	}
+	public void setTramitacoes(Collection<Tramitacao> tramitacoes) {
+		this.tramitacoes = tramitacoes;
+	}
 	public Long getId() {
 		return id;
 	}

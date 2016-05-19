@@ -47,7 +47,7 @@ public class ServicoProponente implements DAO<Proponente, Long> {
 	@Override
 	public List<Proponente> findAll() throws Exception {
 		log.info("Encontrando todos os proponentes");
-		return em.createQuery("from proponente").getResultList();
+		return em.createQuery("from Proponente").getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")

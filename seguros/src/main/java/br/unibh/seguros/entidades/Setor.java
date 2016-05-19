@@ -69,12 +69,27 @@ public class Setor implements Serializable {
 	@OneToMany(mappedBy = "setorSuperior", fetch = FetchType.LAZY)
 	private Collection<Setor> setoresInferiores;
 
+	@OneToMany(mappedBy="proposta", fetch=FetchType.LAZY)
+    private Collection<Tramitacao> tramitacoes;
+	
+	
+	
 	@JoinColumn(name = "setor_superior")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Setor setorSuperior;
 
 	@OneToMany(mappedBy = "setor", fetch = FetchType.LAZY)
 	private Collection<Usuario> mebros;
+
+	
+	
+	public Collection<Tramitacao> getTramitacoes() {
+		return tramitacoes;
+	}
+
+	public void setTramitacoes(Collection<Tramitacao> tramitacoes) {
+		this.tramitacoes = tramitacoes;
+	}
 
 	public Long getId() {
 		return id;
