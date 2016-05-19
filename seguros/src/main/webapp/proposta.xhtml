@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:panelGroup id="cadastro">
+			<h:form id="cad" rendered="#{propostamb.proposta != null}">
+				<p:panel>
+					<h:outputText value="Cadastro de Propostas"
+						style="font-size:18px;font-weight:bold" />
+					<p:messages />
+					<p:panelGrid columns="3" styleClass="ui-noborder">
+						<p:outputLabel value="Nome " />
+						<p:inputText id="nome" value="#{propostamb.proposta.nome}" size="50" />
+						<p:message for="nome" errorClass="invalid" />
+					</p:panelGrid>
+					<p:commandButton id="gravar" action="#{propostamb.gravar}"
+						value="Gravar" update="cadastro" ajax="false" />
+					<p:commandButton id="cancelar" action="#{propostamb.cancelar}"
+						value="Cancelar" immediate="true" update="cadastro,pesquisa"
+						ajax="false" />
+				</p:panel>
+			</h:form>
+		</h:panelGroup>
+		<p:panel id="pesquisa" rendered="#{propostamb.proposta == null}">
+			<h:outputText value="Lista de Propostas"
+				style="font-size:18px;font-weight:bold" />
+			<h:form id="arg">
+				<p:panelGrid columns="4" styleClass="ui-noborder">
+					<p:outputLabel value="Nome:" />
+					<p:inputText id="nomeArg" value="#{propostamb.nomeArg}" />
+					<p:commandButton id="pesquisar" action="#{propostamb.pesquisar}"
+						value="Pesquisar" update="pesquisa" ajax="false" />
+					<p:commandButton id="novo" action="#{propostamb.novo}" value="Novo"
+						update="pesquisa,cadastro" ajax="false" />
+				</p:panelGrid>
+			</h:form>
+			<h:panelGroup rendered="#{empty propostamb.lista}">
+				<h:outputText value="Nenhum proposta existe" />
+			</h:panelGroup>
+			<h:form id="edt">
+				<p:dataTable id="tabela" var="proposta" value="#{propostamb.lista}"
+					rendered="#{not empty propostamb.lista}"
+					onrowclick="selectRow('#{proposta.id}')" paginator="true" rows="15">
+					<p:column headerText="Id" width="10%" sortBy="#{proposta.id}">
+						<div align="center">
+							<h:outputText value="#{proposta.id}" />
+						</div>
+					</p:column>
+					<p:column headerText="Data" width="35%" sortBy="#{proposta.data}">
+						<h:outputText value="#{proposta.data}" />
+					</p:column>
+					<p:column headerText="Tipo Segurado" width="35%" sortBy="#{proposta.tipoSegurado}">
+						<h:outputText value="#{proposta.tipoSegurado}" />
+					</p:column>
+					<p:column headerText="Classe" width="35%" sortBy="#{proposta.classe}">
+						<h:outputText value="#{proposta.classe}" />
+					</p:column>
+					<p:column headerText="Término" width="35%" sortBy="#{proposta.dataTerminoVigencia}">
+						<h:outputText value="#{proposta.dataTerminoVigencia}" />
+					</p:column>
+					<p:column headerText="Comandos" width="20%">
+						<div align="center">
+							<p:commandLink id="editar" action="#{propostamb.editar(proposta.id)}"
+								value="Editar" update="pesquisa" ajax="false" />
+							<h:outputText value=" " />
+							<p:commandLink id="excluir" action="#{propostamb.excluir(proposta.id)}"
+								value="Excluir" update="pesquisa" ajax="false" />
+						</div>
+					</p:column>
+				</p:dataTable>
+				<p:messages />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

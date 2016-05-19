@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:panelGroup id="cadastro">
+			<h:form id="cad" rendered="#{seguromb.seguro != null}">
+				<p:panel>
+					<h:outputText value="Cadastro de Seguros"
+						style="font-size:18px;font-weight:bold" />
+					<p:messages />
+					<p:panelGrid columns="3" styleClass="ui-noborder">
+						<p:outputLabel value="Nome " />
+						<p:inputText id="nome" value="#{seguromb.seguro.nome}" size="50" />
+						<p:message for="nome" errorClass="invalid" />
+					</p:panelGrid>
+					<p:commandButton id="gravar" action="#{seguromb.gravar}"
+						value="Gravar" update="cadastro" ajax="false" />
+					<p:commandButton id="cancelar" action="#{seguromb.cancelar}"
+						value="Cancelar" immediate="true" update="cadastro,pesquisa"
+						ajax="false" />
+				</p:panel>
+			</h:form>
+		</h:panelGroup>
+		<p:panel id="pesquisa" rendered="#{seguromb.seguro == null}">
+			<h:outputText value="Lista de Seguros"
+				style="font-size:18px;font-weight:bold" />
+			<h:form id="arg">
+				<p:panelGrid columns="4" styleClass="ui-noborder">
+					<p:outputLabel value="Nome:" />
+					<p:inputText id="nomeArg" value="#{seguromb.nomeArg}" />
+					<p:commandButton id="pesquisar" action="#{seguromb.pesquisar}"
+						value="Pesquisar" update="pesquisa" ajax="false" />
+					<p:commandButton id="novo" action="#{seguromb.novo}" value="Novo"
+						update="pesquisa,cadastro" ajax="false" />
+				</p:panelGrid>
+			</h:form>
+			<h:panelGroup rendered="#{empty seguromb.lista}">
+				<h:outputText value="Nenhum seguro existe" />
+			</h:panelGroup>
+			<h:form id="edt">
+				<p:dataTable id="tabela" var="seguro" value="#{seguromb.lista}"
+					rendered="#{not empty seguromb.lista}"
+					onrowclick="selectRow('#{seguro.id}')" paginator="true" rows="15">
+					<p:column headerText="Id" width="10%" sortBy="#{seguro.id}">
+						<div align="center">
+							<h:outputText value="#{seguro.id}" />
+						</div>
+					</p:column>
+					<p:column headerText="Código SUSEP" width="35%" sortBy="#{seguro.codigoSusep}">
+						<h:outputText value="#{seguro.codigoSusep}" />
+					</p:column>
+					<p:column headerText="Tipo Segurado" width="35%" sortBy="#{seguro.tipoSegurado}">
+						<h:outputText value="#{seguro.tipoSegurado}" />
+					</p:column>
+					<p:column headerText="Valor Segurado" width="35%" sortBy="#{seguro.valorSegurado}">
+						<h:outputText value="#{seguro.valorSegurado}" />
+					</p:column>
+					<p:column headerText="Comandos" width="20%">
+						<div align="center">
+							<p:commandLink id="editar" action="#{seguromb.editar(seguro.id)}"
+								value="Editar" update="pesquisa" ajax="false" />
+							<h:outputText value=" " />
+							<p:commandLink id="excluir" action="#{seguromb.excluir(seguro.id)}"
+								value="Excluir" update="pesquisa" ajax="false" />
+						</div>
+					</p:column>
+				</p:dataTable>
+				<p:messages />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

@@ -13,7 +13,7 @@ body {
 	width: 960px; /* subtract 40px from banner width for padding */
 	background: #FFFFFF url(#{request.contextPath}/resources/gfx/banner.png)
 		no-repeat;
-	padding-top: 195px;
+	padding-top: 195px;	
 }
 
 #sidebar {

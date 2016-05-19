@@ -2,6 +2,7 @@ package br.unibh.seguros.controle;
 
 import java.util.List;
 import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -9,41 +10,37 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import br.unibh.seguros.entidades.Usuario;
-import br.unibh.seguros.negocio.ServicoUsuario;
+import br.unibh.seguros.entidades.Proposta;
+import br.unibh.seguros.negocio.ServicoProposta;
 
 
-@ManagedBean(name = "usuariomb")
+
+@ManagedBean(name = "propostamb")
 @ViewScoped
-public class ControleUsuario {
+public class ControleProposta {
 	@Inject
 	private Logger log;
 	@Inject
-	private ServicoUsuario ejb;
-	private Usuario usuario;
+	private ServicoProposta ejb;
+	private Proposta proposta;
 	private String nomeArg;
-	private List<Usuario> lista;
-
-	public Usuario getUsuario() {
-		return usuario;
+	private List<Proposta> lista;
+	public Proposta getProposta() {
+		return proposta;
 	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setProposta(Proposta proposta) {
+		this.proposta = proposta;
 	}
-
 	public String getNomeArg() {
 		return nomeArg;
 	}
-
 	public void setNomeArg(String nomeArg) {
 		this.nomeArg = nomeArg;
 	}
-
-	public List<Usuario> getLista() {
+	public List<Proposta> getLista() {
 		return lista;
 	}
-
+	
 	@PostConstruct
 	public void inicializaLista() {
 		try {
@@ -56,10 +53,10 @@ public class ControleUsuario {
 	public void gravar() {
 		FacesMessage facesMsg;
 		try {
-			if (usuario.getId() == null) {
-				usuario = ejb.insert(usuario);
+			if (proposta.getId() == null) {
+				proposta = ejb.insert(proposta);
 			} else {
-				usuario = ejb.update(usuario);
+				proposta = ejb.update(proposta);
 			}
 			lista = ejb.findByName(nomeArg);
 		} catch (Exception e) {
@@ -81,21 +78,21 @@ public class ControleUsuario {
 	}
 
 	public void novo() {
-		usuario = new Usuario();
+		proposta = new Proposta();
 	}
 
 	public void cancelar() {
-		usuario = null;
+		proposta = null;
 	}
 
 	public void editar(Long id) {
 		try {
-			usuario = ejb.find(id);
+			proposta = ejb.find(id);
 			return;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		usuario = null;
+		proposta = null;
 	}
 
 	public void excluir(Long id) {
@@ -110,8 +107,10 @@ public class ControleUsuario {
 			log.warning("Erro: " + e.getMessage());
 			return;
 		}
-		usuario = null;
+		proposta = null;
 		facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Exclusão realizada com sucesso!", "");
 		FacesContext.getCurrentInstance().addMessage("messagePanel", facesMsg);
 	}
+	
+
 }
