@@ -1,6 +1,5 @@
 package br.unibh.seguros.entidades;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,159 +9,197 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="tb_tramitacao")
-@NamedQueries({ @NamedQuery(name = "Tramitacao.findByName", query = "select o from Tramitacao o where o.id = :id") })
-public class Tramitacao implements Serializable {
-	
-	/**
-	 * 
-	 */
+@Table(name = "tb_tramitacao")
+@NamedQuery(name="Tramitacao.findByName", query = "select o from Tramitacao o where o.etapaProcesso like :etapaProcesso")
+public class Tramitacao implements Serializable{
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Version
-	@Column(columnDefinition="bigint NOT NULL DEFAULT 0")
+	@Column(columnDefinition = "bigint NOT NULL DEFAULT 0")
 	private Long version;
+
 	public Long getVersion() {
-	return version;
-	}
-	public void setVersion(Long version) {
-	this.version = version;
+		return version;
 	}
 
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
-	@Pattern(regexp = "[A-zÁ-ú ]")
-	@Max(30)
-	@Column (name="etapa_processo",length=30, nullable=false)
+	@Column(name="etapa_processo",columnDefinition="varchar(30)", nullable=false)
+	@NotNull
+	@Pattern(regexp = "[A-zÀ-ú ]*", message = "Somente letras e espaços")
+	@Size(max =30)
 	private String etapaProcesso;
 	
-	
-	@Column(name="data_hora", nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_hora", nullable=false)
 	private Date dataHora;
 	
-	@NotBlank
-	@Pattern(regexp = "[A-zÁ-ú ]")
-	@Max(50)
-	@Column (name="situacao_inicial",length=50, nullable=false)
+	@Column(name="situacao_inicial",columnDefinition="varchar(50)", nullable=false)
+	@NotNull
+	@Pattern(regexp = "[A-zÀ-ú ]*", message = "Somente letras e espaços")
+	@Size(max = 50)
 	private String situacaoInicial;
 	
-	@NotBlank
-	@Pattern(regexp = "[A-zÁ-ú ]")
-	@Max(50)
-	@Column (name="situacao_final",length=50, nullable=false)
+	@Column(name="situacao_final",columnDefinition="varchar(50)", nullable=false)
+	@Pattern(regexp = "[A-zÀ-ú ]*", message = "Somente letras e espaços")
+	@NotNull
+	@Size(max = 50)
 	private String situacaoFinal;
 	
-	@NotBlank
-	@Pattern(regexp = "[A-zÁ-ú ]")
-	@Max(100)
-	@Column (name="tipo_decisao",length=100, nullable=false)
+	@Column(name="tipo_decisao",columnDefinition="varchar(100)", nullable=false)
+	@NotNull
+	@Size(max = 100)
+	@Pattern(regexp = "[A-zÀ-ú ]*", message = "Somente letras e espaços")
 	private String tipoDecisao;
 	
-	@Pattern(regexp = "[A-zÁ-ú ]")
-	@Max(4000)
-	@Column (columnDefinition="TEXT(4000)", nullable=false)
+	@Column(name="comentario",columnDefinition="varchar(4000)", nullable=true)
+	@Pattern(regexp = "[A-zÀ-ú ]*", message = "Somente letras e espaços")
+	@Size(max = 4000)
 	private String comentario;
-
-	@Lob
-	@Column
-	private File documento;
+	
+	@Column(name="documento",columnDefinition="blob", nullable=true)
+	private String documento;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Proposta proposta;
-
-	@JoinColumn(name="setor_responsavel")
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Setor setorResponsavel;
 	
-	@JoinColumn(name="usuario_decisao")
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Usuario usuarioDecisao;
 	
+	@ManyToOne(fetch=FetchType.EAGER)
+	private Tramitacao tramitacoes;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getEtapaProcesso() {
 		return etapaProcesso;
 	}
+
 	public void setEtapaProcesso(String etapaProcesso) {
 		this.etapaProcesso = etapaProcesso;
 	}
+
 	public Date getDataHora() {
 		return dataHora;
 	}
+
 	public void setDataHora(Date dataHora) {
 		this.dataHora = dataHora;
 	}
+
 	public String getSituacaoInicial() {
 		return situacaoInicial;
 	}
+
 	public void setSituacaoInicial(String situacaoInicial) {
 		this.situacaoInicial = situacaoInicial;
 	}
+
 	public String getSituacaoFinal() {
 		return situacaoFinal;
 	}
+
 	public void setSituacaoFinal(String situacaoFinal) {
 		this.situacaoFinal = situacaoFinal;
 	}
+
 	public String getTipoDecisao() {
 		return tipoDecisao;
 	}
+
 	public void setTipoDecisao(String tipoDecisao) {
 		this.tipoDecisao = tipoDecisao;
 	}
+
 	public String getComentario() {
 		return comentario;
 	}
+
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-	public File getDocumento() {
+
+	public String getDocumento() {
 		return documento;
 	}
-	public void setDocumento(File documento) {
+
+	public void setDocumento(String documento) {
 		this.documento = documento;
 	}
-	public Proposta getProposta() {
-		return proposta;
-	}
-	public void setProposta(Proposta proposta) {
-		this.proposta = proposta;
-	}
-	public Setor getSetorResponsavel() {
-		return setorResponsavel;
-	}
-	public void setSetorResponsavel(Setor setorResponsavel) {
-		this.setorResponsavel = setorResponsavel;
-	}
+	
 	public Usuario getUsuarioDecisao() {
 		return usuarioDecisao;
 	}
+
 	public void setUsuarioDecisao(Usuario usuarioDecisao) {
 		this.usuarioDecisao = usuarioDecisao;
 	}
+
+	public Setor getSetorResponsavel() {
+		return setorResponsavel;
+	}
+
+	public void setSetorResponsavel(Setor setorResponsavel) {
+		this.setorResponsavel = setorResponsavel;
+	}
+
+	public Proposta getPropostas() {
+		return proposta;
+	}
+
+	public void setPropostas(Proposta propostas) {
+		this.proposta = propostas;
+	}
+
+	public Tramitacao() {
+		super();
+	}
+
+	public Tramitacao(String etapaProcesso, Date dataHora, String situacaoInicial, String situacaoFinal,
+			String tipoDecisao, String comentario, String documento, Proposta proposta, Setor setorResponsavel,
+			Usuario usuarioDecisao, Tramitacao tramitacoes) {
+		super();
+		this.etapaProcesso = etapaProcesso;
+		this.dataHora = dataHora;
+		this.situacaoInicial = situacaoInicial;
+		this.situacaoFinal = situacaoFinal;
+		this.tipoDecisao = tipoDecisao;
+		this.comentario = comentario;
+		this.documento = documento;
+		this.proposta = proposta;
+		this.setorResponsavel = setorResponsavel;
+		this.usuarioDecisao = usuarioDecisao;
+		this.tramitacoes = tramitacoes;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -172,14 +209,12 @@ public class Tramitacao implements Serializable {
 		result = prime * result + ((documento == null) ? 0 : documento.hashCode());
 		result = prime * result + ((etapaProcesso == null) ? 0 : etapaProcesso.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((proposta == null) ? 0 : proposta.hashCode());
-		result = prime * result + ((setorResponsavel == null) ? 0 : setorResponsavel.hashCode());
 		result = prime * result + ((situacaoFinal == null) ? 0 : situacaoFinal.hashCode());
 		result = prime * result + ((situacaoInicial == null) ? 0 : situacaoInicial.hashCode());
 		result = prime * result + ((tipoDecisao == null) ? 0 : tipoDecisao.hashCode());
-		result = prime * result + ((usuarioDecisao == null) ? 0 : usuarioDecisao.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -214,16 +249,6 @@ public class Tramitacao implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (proposta == null) {
-			if (other.proposta != null)
-				return false;
-		} else if (!proposta.equals(other.proposta))
-			return false;
-		if (setorResponsavel == null) {
-			if (other.setorResponsavel != null)
-				return false;
-		} else if (!setorResponsavel.equals(other.setorResponsavel))
-			return false;
 		if (situacaoFinal == null) {
 			if (other.situacaoFinal != null)
 				return false;
@@ -239,15 +264,6 @@ public class Tramitacao implements Serializable {
 				return false;
 		} else if (!tipoDecisao.equals(other.tipoDecisao))
 			return false;
-		if (usuarioDecisao == null) {
-			if (other.usuarioDecisao != null)
-				return false;
-		} else if (!usuarioDecisao.equals(other.usuarioDecisao))
-			return false;
 		return true;
 	}
-	
-	
-	
-	
 }

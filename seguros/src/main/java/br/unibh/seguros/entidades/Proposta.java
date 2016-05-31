@@ -135,7 +135,7 @@ public class Proposta implements Serializable {
 	
 
 	public Questionario getQuestionario() {
-		return questionario;
+		return Questionario;
 	}
 	public void setQuestionario(Questionario questionario) {
 		this.questionario = questionario;

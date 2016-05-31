@@ -2,14 +2,12 @@ package br.unibh.seguros.controle;
 
 import java.util.List;
 import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-
 import br.unibh.seguros.entidades.Tramitacao;
 import br.unibh.seguros.negocio.ServicoTramitacao;
 
@@ -114,5 +112,4 @@ public class ControleTramitacao {
 		facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Exclusão realizada com sucesso!", "");
 		FacesContext.getCurrentInstance().addMessage("messagePanel", facesMsg);
 	}
-
 }

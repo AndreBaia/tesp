@@ -13,9 +13,32 @@
 						style="font-size:18px;font-weight:bold" />
 					<p:messages />
 					<p:panelGrid columns="3" styleClass="ui-noborder">
-						<p:outputLabel value="Nome " />
-						<p:inputText id="id" value="#{tramitacaomb.tramitacao.id}" size="50" />
-						<p:message for="id" errorClass="invalid" />
+						<p:outputLabel value="Etapa Processo: " />
+						<p:inputText id="etapaProcesso" value="#{tramitacaomb.tramitacao.etapaProcesso}" size="50" />
+						<p:message for="etapaProcesso" errorClass="invalid" />			
+			            <p:outputLabel for="dataHora" value="Data e Hora: " />
+        				<p:calendar id="dataHora" value="#{tramitacaomb.tramitacao.dataHora}" pattern="MM/dd/yyyy HH:mm:ss" /><br /><br />
+        				<p:outputLabel for="situacaoInicial" value="Situacao Inicial " />
+				        <p:selectOneMenu id="situacaoInicial" value="#{tramitacaomb.tramitacao.situacaoInicial}">
+				        <p:outputLabel for="situacaoInicial" value="Situacao Inicial: " />
+				        <f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+				        <f:selectItem itemLabel="Pendente" itemValue="Pendente" />
+				        <f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+				        </p:selectOneMenu><br /><br />
+				        <p:outputLabel for="situacaoFinal" value="Situacao Final: " />
+				        <p:selectOneMenu id="situacaoFinal" value="#{tramitacaomb.tramitacao.situacaoFinal}">
+				        <f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+				        <f:selectItem itemLabel="Pendente" itemValue="Pendente" />
+				        <f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+				        </p:selectOneMenu><br /><br />
+				        <p:outputLabel for="tipoDecisao" value="Tipo Decisão: " />
+				        <p:selectOneMenu id="tipoDecisao" value="#{tramitacaomb.tramitacao.tipoDecisao}">
+				        <f:selectItem itemLabel="Aprovado" itemValue="Aprovado" />
+				        <f:selectItem itemLabel="Reprovado" itemValue="Reprovado" />
+				        </p:selectOneMenu><br /><br />
+				       	<p:outputLabel value="Comentários: " />
+						<p:inputText id="comentario" value="#{tramitacaomb.tramitacao.comentario}" size="50" />
+						<p:message for="comentario" errorClass="invalid" />			<br /><br />
 					</p:panelGrid>
 					<p:commandButton id="gravar" action="#{tramitacaomb.gravar}"
 						value="Gravar" update="cadastro" ajax="false" />
@@ -26,11 +49,11 @@
 			</h:form>
 		</h:panelGroup>
 		<p:panel id="pesquisa" rendered="#{tramitacaomb.tramitacao == null}">
-			<h:outputText value="Tramitação"
+			<h:outputText value="Lista de Tramitações"
 				style="font-size:18px;font-weight:bold" />
 			<h:form id="arg">
 				<p:panelGrid columns="4" styleClass="ui-noborder">
-					<p:outputLabel value="Nome:" />
+					<p:outputLabel value="Etapa Processo:" />
 					<p:inputText id="nomeArg" value="#{tramitacaomb.nomeArg}" />
 					<p:commandButton id="pesquisar" action="#{tramitacaomb.pesquisar}"
 						value="Pesquisar" update="pesquisa" ajax="false" />
@@ -39,7 +62,7 @@
 				</p:panelGrid>
 			</h:form>
 			<h:panelGroup rendered="#{empty tramitacaomb.lista}">
-				<h:outputText value="Nenhum tramitacao existe" />
+				<h:outputText value="Nenhum Tramitações existente" />
 			</h:panelGroup>
 			<h:form id="edt">
 				<p:dataTable id="tabela" var="tramitacao" value="#{tramitacaomb.lista}"
@@ -50,17 +73,23 @@
 							<h:outputText value="#{tramitacao.id}" />
 						</div>
 					</p:column>
-					<p:column headerText="Etapa" width="35%" sortBy="#{tramitacao.etapaProcesso}">
+					<p:column headerText="Etapa Processo" width="35%" sortBy="#{tramitacao.etapaProcesso}">
 						<h:outputText value="#{tramitacao.etapaProcesso}" />
 					</p:column>
-					<p:column headerText="Situação Inicial" width="35%" sortBy="#{tramitacao.situacaoInicial}">
+					<p:column headerText="Data e Hora" width="35%" sortBy="#{tramitacao.dataHora}">
+						<h:outputText value="#{tramitacao.dataHora}" />
+					</p:column>
+					<p:column headerText="Situacao Inicial" width="35%" sortBy="#{tramitacao.situacaoInicial}">
 						<h:outputText value="#{tramitacao.situacaoInicial}" />
 					</p:column>
-					<p:column headerText="Situação Final" width="35%" sortBy="#{tramitacao.situacaoFinal}">
+					<p:column headerText="Situacao Final" width="35%" sortBy="#{tramitacao.situacaoFinal}">
 						<h:outputText value="#{tramitacao.situacaoFinal}" />
 					</p:column>
-					<p:column headerText="Decisão" width="35%" sortBy="#{tramitacao.tipoDecisao}">
+					<p:column headerText="Tipo Decisao" width="90%" sortBy="#{tramitacao.tipoDecisao}">
 						<h:outputText value="#{tramitacao.tipoDecisao}" />
+					</p:column>
+					<p:column headerText="Comentário" width="35%" sortBy="#{tramitacao.comentario}">
+						<h:outputText value="#{tramitacao.comentario}" />
 					</p:column>
 					<p:column headerText="Comandos" width="20%">
 						<div align="center">

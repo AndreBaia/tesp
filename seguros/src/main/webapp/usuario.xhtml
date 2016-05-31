@@ -13,33 +13,26 @@
 						style="font-size:18px;font-weight:bold" />
 					<p:messages />
 					<p:panelGrid columns="3" styleClass="ui-noborder">
-						<p:outputLabel value="Nome" />
+						<p:outputLabel value="Nome " />
 						<p:inputText id="nome" value="#{usuariomb.usuario.nome}" size="50" />
 						<p:message for="nome" errorClass="invalid" />
-						<p:outputLabel value="Login" />
-						<p:inputText id="login" value="#{usuariomb.usuario.login}"
-							size="50" />
+						<p:outputLabel value="Login " />
+						<p:inputText id="login" value="#{usuariomb.usuario.login}" size="50" />
 						<p:message for="login" errorClass="invalid" />
-						<p:outputLabel value="Senha" />
-						<p:inputText id="senha" value="#{usuariomb.usuario.senha}"
-							size="50" />
+						<p:outputLabel value="Senha " />
+						<p:inputText id="senha" value="#{usuariomb.usuario.senha}" size="50" type="password"/>
 						<p:message for="senha" errorClass="invalid" />
-						<p:outputLabel value="E-mail" />
-						<p:inputText id="email" value="#{usuariomb.usuario.email}"
-							size="50" />
-						<p:message for="email" errorClass="invalid" />
-						<p:outputLabel value="Perfil" />
-						<p:inputText id="perfil" value="#{usuariomb.usuario.perfil}"
-							size="50" />
+						<p:outputLabel value="Perfil " />
+						<p:inputText id="perfil" value="#{usuariomb.usuario.perfil}" size="50"/>
 						<p:message for="perfil" errorClass="invalid" />
-						<p:outputLabel value="Cargo" />
-						<p:inputText id="cargo" value="#{usuariomb.usuario.cargo}"
-							size="50" />
+						<p:outputLabel value="Cargo " />
+						<p:inputText id="cargo" value="#{usuariomb.usuario.cargo}" size="50"/>
 						<p:message for="cargo" errorClass="invalid" />
-						<p:outputLabel value="Setor" />
-						<p:inputText id="setor" value="#{usuariomb.usuario.setor}"
-							size="50" />
-						<p:message for="setor" errorClass="invalid" />
+						<p:outputLabel value="E-mail " />
+						<p:inputText id="email" value="#{usuariomb.usuario.email}" size="50"/>
+						<p:message for="email" errorClass="invalid" />
+						<p:outputLabel value="Data Cadastro " />
+        				<p:calendar id="effect" value="#{usuariomb.usuario.dataCadastro}" effect="fold" />
 					</p:panelGrid>
 					<p:commandButton id="gravar" action="#{usuariomb.gravar}"
 						value="Gravar" update="cadastro" ajax="false" />
@@ -63,7 +56,7 @@
 				</p:panelGrid>
 			</h:form>
 			<h:panelGroup rendered="#{empty usuariomb.lista}">
-				<h:outputText value="Nenhum usuario existe" />
+				<h:outputText value="Nenhum Usuários existe" />
 			</h:panelGroup>
 			<h:form id="edt">
 				<p:dataTable id="tabela" var="usuario" value="#{usuariomb.lista}"
@@ -77,22 +70,28 @@
 					<p:column headerText="Nome" width="35%" sortBy="#{usuario.nome}">
 						<h:outputText value="#{usuario.nome}" />
 					</p:column>
-					<p:column headerText="Perfil" width="35%"
-						sortBy="#{usuario.perfil}">
+					<p:column headerText="Login" width="35%" sortBy="#{usuario.login}">
+						<h:outputText value="#{usuario.login}" />
+					</p:column>
+					<p:column headerText="Perfil" width="35%" sortBy="#{usuario.perfil}">
 						<h:outputText value="#{usuario.perfil}" />
 					</p:column>
 					<p:column headerText="Cargo" width="35%" sortBy="#{usuario.cargo}">
 						<h:outputText value="#{usuario.cargo}" />
 					</p:column>
+					<p:column headerText="Email" width="90%" sortBy="#{usuario.email}">
+						<h:outputText value="#{usuario.email}" />
+					</p:column>
+					<p:column headerText="Data Cadastro" width="35%" sortBy="#{usuario.dataCadastro}">
+						<h:outputText value="#{usuario.dataCadastro}" />
+					</p:column>
 					<p:column headerText="Comandos" width="20%">
 						<div align="center">
-							<p:commandLink id="editar"
-								action="#{usuariomb.editar(usuario.id)}" value="Editar"
-								update="pesquisa" ajax="false" />
+							<p:commandLink id="editar" action="#{usuariomb.editar(usuario.id)}"
+								value="Editar" update="pesquisa" ajax="false" />
 							<h:outputText value=" " />
-							<p:commandLink id="excluir"
-								action="#{usuariomb.excluir(usuario.id)}" value="Excluir"
-								update="pesquisa" ajax="false" />
+							<p:commandLink id="excluir" action="#{usuariomb.excluir(usuario.id)}"
+								value="Excluir" update="pesquisa" ajax="false" />
 						</div>
 					</p:column>
 				</p:dataTable>

@@ -2,12 +2,14 @@ package br.unibh.seguros.negocio;
 
 import java.util.List;
 import java.util.logging.Logger;
-
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-
 import br.unibh.seguros.entidades.Tramitacao;
 
+@Stateless
+@LocalBean
 public class ServicoTramitacao implements DAO<Tramitacao, Long> {
 	@Inject
 	EntityManager em;
@@ -43,19 +45,14 @@ public class ServicoTramitacao implements DAO<Tramitacao, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tramitacao> findAll() throws Exception {
-		log.info("Encontrando todas as Tramitacões");
+		log.info("Encontrando todas as tramitações");
 		return em.createQuery("from Tramitacao").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Tramitacao> findByName(String name) throws Exception {
-		log.info("Encontrando a " + name);
-		if (name == null || name.trim().equals("")){
-			return findAll();
-		} else {
-			return em.createNamedQuery("Tramitacao.findByName").setParameter("id", new Long(name)).getResultList();
-		}
+	public List<Tramitacao> findByName(String etapaProcesso) throws Exception {
+		log.info("Encontrando o " + etapaProcesso);
+		return em.createNamedQuery("Tramitacao.findByName").setParameter("etapaProcesso", etapaProcesso + "%").getResultList();
 	}
-
 }
