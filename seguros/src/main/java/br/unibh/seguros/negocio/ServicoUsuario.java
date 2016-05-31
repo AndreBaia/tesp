@@ -1,13 +1,18 @@
 package br.unibh.seguros.negocio;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.unibh.seguros.entidades.Usuario;
 
+@Stateless
+@LocalBean
 public class ServicoUsuario implements DAO<Usuario, Long> {
 	@Inject
 	EntityManager em;
@@ -16,6 +21,7 @@ public class ServicoUsuario implements DAO<Usuario, Long> {
 
 	@Override
 	public Usuario insert(Usuario t) throws Exception {
+		t.setDataCadastro(new Date());
 		log.info("Persistindo " + t);
 		em.persist(t);
 		return t;

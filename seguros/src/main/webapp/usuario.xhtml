@@ -31,8 +31,6 @@
 						<p:outputLabel value="E-mail " />
 						<p:inputText id="email" value="#{usuariomb.usuario.email}" size="50"/>
 						<p:message for="email" errorClass="invalid" />
-						<p:outputLabel value="Data Cadastro " />
-        				<p:calendar id="effect" value="#{usuariomb.usuario.dataCadastro}" effect="fold" />
 					</p:panelGrid>
 					<p:commandButton id="gravar" action="#{usuariomb.gravar}"
 						value="Gravar" update="cadastro" ajax="false" />

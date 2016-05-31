@@ -42,13 +42,13 @@ public class Proponente extends PessoaFisica implements Serializable {
 
 	@NotBlank
 	@Pattern(regexp = "[A-zÁ-ú ]*")
-	@Max(30)
+	@Size(max = 30)
 	@Column(name = "situacao_cadastro", nullable = false, length = 30)
 	private String situacaoCadastro;
 
 	@NotBlank
 	@Pattern(regexp = "[A-zÁ-ú ]*")
-	@Max(30)
+	@Size(max = 30)
 	@Column(nullable = false, length = 30)
 	private String status;
 

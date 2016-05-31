@@ -16,6 +16,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -45,11 +46,11 @@ public class PessoaFisica implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotBlank
-	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Pattern(regexp = "[A-zÁ-ú ]*", message="Favor fornecer apenas letras e espaços")
 	@Size(min = 5, max = 100)
 	@Column (length=100, nullable=false)
 	private String nome;
@@ -60,7 +61,7 @@ public class PessoaFisica implements Serializable {
 	@Column (length=11, nullable=false,unique=true)
 	private String cpf;
 	
-	@Pattern(regexp = "\\(\\d{2}\\)\\d{4}-\\d{4}")
+	@Pattern(regexp = "\\(\\d{2}\\)\\d{4}-\\d{4}", message="Favor fornecer no formato (00)0000-0000")
 	@Column (name="telefone_comercial",length=14)
 	private String telefoneComercial;
 	
@@ -83,7 +84,7 @@ public class PessoaFisica implements Serializable {
 	@Column (nullable=false)
 	private int idade; 
 	
-	@NotBlank
+	@NotNull
 	@Past
 	@Column (name="data_nascimento", nullable=false)
 	@Temporal(TemporalType.DATE)

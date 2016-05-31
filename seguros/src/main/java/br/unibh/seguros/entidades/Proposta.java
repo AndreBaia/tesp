@@ -24,6 +24,7 @@ import javax.persistence.Version;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -72,7 +73,8 @@ public class Proposta implements Serializable {
 	
 	@NotBlank
 	@Pattern(regexp = "[A-Z]")
-	@Size(min = 1, max = 1)
+	@Min(1)
+	@Max(1)
 	@Column(columnDefinition="char(1)", nullable=false)
     private String classe;
 	
@@ -87,7 +89,8 @@ public class Proposta implements Serializable {
     private Date dataTerminoVigencia;
 	
 	@NotNull
-	@Size(min = 0, max = 24)
+	@Min(0)
+	@Max(24)
 	@Column(name="carencia_em_meses", columnDefinition="int", nullable=false)
     private Integer carenciaEmMeses;
 	
@@ -104,7 +107,8 @@ public class Proposta implements Serializable {
     private BigDecimal valorPremio;
 	
 	@NotNull
-	@Size(min = 1, max = 31)
+	@Min(1)
+	@Max(31)
 	@Column(name="dia_pagamento", columnDefinition="int", nullable=false)
     private Integer diaPagamento;
 	

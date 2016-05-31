@@ -50,6 +50,7 @@ public class Tramitacao implements Serializable{
 	private String etapaProcesso;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
 	@Column(name="data_hora", nullable=false)
 	private Date dataHora;
 	
