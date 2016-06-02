@@ -60,7 +60,7 @@ public class Proposta implements Serializable {
 	private Date data;
 	
 	@NotBlank
-	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Pattern(regexp = "[A-zÁ-ú ]*")
 	@Max(30)
 	@Column(name="tipo_segurado", length=30, nullable=false)
     private String tipoSegurado;
@@ -72,7 +72,7 @@ public class Proposta implements Serializable {
     private BigDecimal valorSegurado;
 	
 	@NotBlank
-	@Pattern(regexp = "[A-Z]")
+	@Pattern(regexp = "[A-zÁ-ú ]*")
 	@Min(1)
 	@Max(1)
 	@Column(columnDefinition="char(1)", nullable=false)
@@ -95,12 +95,12 @@ public class Proposta implements Serializable {
     private Integer carenciaEmMeses;
 	
 	@NotBlank
-	@Pattern(regexp = "[A-zÁ-ú ]")
+	@Pattern(regexp = "[A-zÁ-ú ]*")
 	@Max(30)
 	@Column(name="situacao_atual", length=30, nullable=false)
     private String situacaoAtual;
 	
-	@NotBlank
+	@NotNull
 	@DecimalMin("100.00")
 	@DecimalMax("100000.00")
 	@Column(name="valor_premio", columnDefinition="DECIMAL(14,2)", nullable=false)

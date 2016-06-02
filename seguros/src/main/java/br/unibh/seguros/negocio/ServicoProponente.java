@@ -1,5 +1,6 @@
 package br.unibh.seguros.negocio;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ public class ServicoProponente implements DAO<Proponente, Long> {
 	@Override
 	public Proponente insert(Proponente t) throws Exception {
 		log.info("Persistindo " + t);
+		t.setDataCadastro(new Date());
 		em.persist(t);
 		return null;
 	}

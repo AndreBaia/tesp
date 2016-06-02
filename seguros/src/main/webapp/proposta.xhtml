@@ -9,43 +9,60 @@
 		<h:panelGroup id="cadastro">
 			<h:form id="cad" rendered="#{propostamb.proposta != null}">
 				<p:panel>
-					<h:outputText value="Cadastro de Proponente"
+					<h:outputText value="Cadastro de Propostas"
 						style="font-size:18px;font-weight:bold" />
 					<p:messages />
-					<p:panelGrid columns="3" styleClass="ui-noborder">
-						<p:outputLabel value="Data: " />
-        				<p:calendar id="data" value="#{propostamb.proposta.data}" effect="fold" /><br /><br />
-						<p:outputLabel value="Tipo Segurado: " />
-						<p:inputText id="tipoSegurado" value="#{propostamb.proposta.tipoSegurado}" size="50" />
-						<p:message for="tipoSegurado" errorClass="invalid" />
-						<h:outputLabel for="valorSegurado" value="Valor Segurado: " />
-						<p:spinner id="valorSegurado" value="#{propostamb.proposta.valorSegurado}" stepFactor="0.1" /><br /><br />
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:outputLabel for="tipoSegurado" value="Tipo Segurado: " />
+						<p:selectOneMenu id="tipoSegurado"
+							value="#{propostamb.proposta.tipoSegurado}">
+						<f:selectItem itemLabel="Pessoa Física" itemValue="Pessoa Física" />
+						<f:selectItem itemLabel="Pessoa Jurídica" itemValue="Pessoa Jurídica" />
+						</p:selectOneMenu>						
+						<p:outputLabel for="valorSegurado" value="Valor Segurado: " />
+						<p:spinner id="valorSegurado"
+							value="#{propostamb.proposta.valorSegurado}" stepFactor="0.1" />
 						<p:outputLabel value="Classe: " />
-						<p:inputText id="classe" value="#{propostamb.proposta.classe}" size="50" />
+						<p:inputText id="classe" value="#{propostamb.proposta.classe}"
+							size="35" />
 						<p:message for="classe" errorClass="invalid" />
-						<p:outputLabel value="Data Inicio Vigencia: " />
-        				<p:calendar id="dataInicioVigencia" value="#{propostamb.proposta.dataInicioVigencia}" effect="fold" /><br /><br />
-        				<p:outputLabel value="Data Termino Vigencia: " />
-        				<p:calendar id="dataTerminoVigencia" value="#{propostamb.proposta.dataTerminoVigencia}" effect="fold" /><br /><br />
-        				<p:outputLabel value="Carencia em meses: " />
-        				<p:spinner id="carenciaEmMeses" value="#{propostamb.proposta.carenciaEmMeses}" max="24"/><br /><br />
-        				<p:outputLabel for="situacaoAtual" value="Situacao Atual: " />
-				        <p:selectOneMenu id="situacaoAtual" value="#{propostamb.proposta.situacaoAtual}">
-				        <f:selectItem itemLabel="Ativo" itemValue="Ativo" />
-				        <f:selectItem itemLabel="Pendente" itemValue="Pendente" />
-				        <f:selectItem itemLabel="Inativo" itemValue="Inativo" />
-				        </p:selectOneMenu><br /><br />
-				        <h:outputLabel for="valorPremio" value="Valor Premio: " />
-        				<p:spinner id="valorPremio" value="#{propostamb.proposta.valorPremio}" stepFactor="0.1" /><br /><br />
-        				<h:outputLabel for="diaPagamento" value="Dia Pagamento: " />
-        				<p:spinner id="diaPagamento" value="#{propostamb.proposta.diaPagamento}" stepFactor="0.0" /><br /><br />
-        				<h:outputLabel for="conta" value="Banco Pagamento: " />
-        				<p:spinner id="conta" value="#{propostamb.proposta.conta}" stepFactor="0.1" /><br /><br />
-        				<h:outputLabel for="agencia" value="Agência: " />
-        				<p:spinner id="agencia" value="#{propostamb.proposta.agencia}" stepFactor="0.1" /><br /><br />
-        				<h:outputLabel for="bancoPagamento" value="Conta: " />
-        				<p:spinner id="bancoPagamento" value="#{propostamb.proposta.bancoPagamento}" stepFactor="0.1" /><br /><br />
-					</p:panelGrid>
+						<p:outputLabel value="Data Início Vigência: " />
+						<p:calendar id="dataInicioVigencia"
+							value="#{propostamb.proposta.dataInicioVigencia}" effect="fold" />
+						<p:outputLabel value="Data Término Vigencia: " />
+						<p:calendar id="dataTerminoVigencia"
+							value="#{propostamb.proposta.dataTerminoVigencia}" effect="fold" />
+						<p:outputLabel value="Carência em meses: " />
+						<p:spinner id="carenciaEmMeses"
+							value="#{propostamb.proposta.carenciaEmMeses}" max="24" />
+						<p:outputLabel for="situacaoAtual" value="Situação Atual: " />
+						<p:selectOneMenu id="situacaoAtual"
+							value="#{propostamb.proposta.situacaoAtual}">
+							<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+							<f:selectItem itemLabel="Pendente" itemValue="Pendente" />
+							<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+						</p:selectOneMenu>
+						<h:outputLabel for="valorPremio" value="Valor Premio: " />
+						<p:spinner id="valorPremio"
+							value="#{propostamb.proposta.valorPremio}" stepFactor="0.1" />
+						<h:outputLabel for="diaPagamento" value="Dia Pagamento: " />
+						<p:spinner id="diaPagamento"
+							value="#{propostamb.proposta.diaPagamento}" stepFactor="0.0" />
+						<p:outputLabel for="bancoPagamento" value="Banco Pagamento: " />
+						<p:selectOneMenu id="bancoPagamento"
+							value="#{propostamb.proposta.bancoPagamento}">
+						<f:selectItem itemLabel="Caixa" itemValue="Caixa" />
+						<f:selectItem itemLabel="Bradesco" itemValue="Bradesco" />
+						<f:selectItem itemLabel="Itau" itemValue="Itau" />
+						<f:selectItem itemLabel="Santander" itemValue="Santander" />
+						<f:selectItem itemLabel="Banco do Brasil" itemValue="Banco do Brasil" />
+						<f:selectItem itemLabel="HSBC" itemValue="HSBC" />
+						<f:selectItem itemLabel="Mercantil" itemValue="Mercantil" />
+						</p:selectOneMenu>
+						<h:outputLabel for="agencia" value="Agência: " />
+						<p:spinner id="agencia" value="#{propostamb.proposta.agencia}"
+							stepFactor="0.1" />
+						</p:panelGrid>
 					<p:commandButton id="gravar" action="#{propostamb.gravar}"
 						value="Gravar" update="cadastro" ajax="false" />
 					<p:commandButton id="cancelar" action="#{propostamb.cancelar}"
@@ -82,46 +99,59 @@
 					<p:column headerText="Data: " width="35%" sortBy="#{proposta.data}">
 						<h:outputText value="#{proposta.data}" />
 					</p:column>
-					<p:column headerText="Tipo Segurado " width="35%" sortBy="#{proposta.tipoSegurado}">
+					<p:column headerText="Tipo Segurado " width="35%"
+						sortBy="#{proposta.tipoSegurado}">
 						<h:outputText value="#{proposta.tipoSegurado}" />
 					</p:column>
-					<p:column headerText="Valor Segurado " width="35%" sortBy="#{proposta.valorSegurado}">
+					<p:column headerText="Valor Segurado " width="35%"
+						sortBy="#{proposta.valorSegurado}">
 						<h:outputText value="#{proposta.valorSegurado}" />
 					</p:column>
-					<p:column headerText="Classe " width="35%" sortBy="#{proposta.classe}">
+					<p:column headerText="Classe " width="35%"
+						sortBy="#{proposta.classe}">
 						<h:outputText value="#{proposta.classe}" />
 					</p:column>
-					<p:column headerText="Data inicio vigência " width="35%" sortBy="#{proposta.dataInicioVigencia}">
+					<p:column headerText="Data inicio vigência " width="35%"
+						sortBy="#{proposta.dataInicioVigencia}">
 						<h:outputText value="#{proposta.dataInicioVigencia}" />
 					</p:column>
-					<p:column headerText="Data fim vigência " width="35%" sortBy="#{proposta.dataTerminoVigencia}">
+					<p:column headerText="Data fim vigência " width="35%"
+						sortBy="#{proposta.dataTerminoVigencia}">
 						<h:outputText value="#{proposta.dataTerminoVigencia}" />
 					</p:column>
-					<p:column headerText="Carencia em meses " width="35%" sortBy="#{proposta.carenciaEmMeses}">
+					<p:column headerText="Carencia em meses " width="35%"
+						sortBy="#{proposta.carenciaEmMeses}">
 						<h:outputText value="#{proposta.carenciaEmMeses}" />
 					</p:column>
-					<p:column headerText="Situação Atual " width="35%" sortBy="#{proposta.situacaoAtual}">
+					<p:column headerText="Situação Atual " width="35%"
+						sortBy="#{proposta.situacaoAtual}">
 						<h:outputText value="#{proposta.situacaoAtual}" />
 					</p:column>
-					<p:column headerText="Valor Premio " width="35%" sortBy="#{proposta.valorPremio}">
+					<p:column headerText="Valor Premio " width="35%"
+						sortBy="#{proposta.valorPremio}">
 						<h:outputText value="#{proposta.valorPremio}" />
 					</p:column>
-					<p:column headerText="Dia Pagamento " width="35%" sortBy="#{proposta.diaPagamento}">
+					<p:column headerText="Dia Pagamento " width="35%"
+						sortBy="#{proposta.diaPagamento}">
 						<h:outputText value="#{proposta.diaPagamento}" />
 					</p:column>
-					<p:column headerText="Agência " width="35%" sortBy="#{proposta.agencia}">
+					<p:column headerText="Agência " width="35%"
+						sortBy="#{proposta.agencia}">
 						<h:outputText value="#{proposta.agencia}" />
 					</p:column>
-					<p:column headerText="Conta " width="35%" sortBy="#{proposta.bancoPagamento}">
+					<p:column headerText="Conta " width="35%"
+						sortBy="#{proposta.bancoPagamento}">
 						<h:outputText value="#{proposta.bancoPagamento}" />
 					</p:column>
 					<p:column headerText="Comandos" width="20%">
 						<div align="center">
-							<p:commandLink id="editar" action="#{propostamb.editar(proposta.id)}"
-								value="Editar" update="pesquisa" ajax="false" />
+							<p:commandLink id="editar"
+								action="#{propostamb.editar(proposta.id)}" value="Editar"
+								update="pesquisa" ajax="false" />
 							<h:outputText value=" " />
-							<p:commandLink id="excluir" action="#{propostamb.excluir(proposta.id)}"
-								value="Excluir" update="pesquisa" ajax="false" />
+							<p:commandLink id="excluir"
+								action="#{propostamb.excluir(proposta.id)}" value="Excluir"
+								update="pesquisa" ajax="false" />
 						</div>
 					</p:column>
 				</p:dataTable>

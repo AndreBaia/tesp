@@ -39,9 +39,7 @@
 						<p:message for="situacaoCadastro" errorClass="invalid" />
 						<p:outputLabel value="Status " />
 						<p:inputText id="status" value="#{proponentemb.proponente.status}" size="50"/>
-						<p:message for="status" errorClass="invalid" />
-						<p:outputLabel value="Data Cadastro: " />
-        				<p:calendar id="dataCadastro" value="#{proponentemb.proponente.dataCadastro}" effect="fold" />
+						<p:message for="status" errorClass="invalid" />					
 					</p:panelGrid>
 					<p:commandButton id="gravar" action="#{proponentemb.gravar}"
 						value="Gravar" update="cadastro" ajax="false" />
@@ -78,9 +76,6 @@
 					</p:column>
 					<p:column headerText="Matricula " width="35%" sortBy="#{proponente.matricula}">
 						<h:outputText value="#{proponente.matricula}" />
-					</p:column>
-					<p:column headerText="Data Cadastro " width="35%" sortBy="#{proponente.dataCadastro}">
-						<h:outputText value="#{proponente.dataCadastro}" />
 					</p:column>
 					<p:column headerText="Situação Cadastro " width="35%" sortBy="#{proponente.situacaoCadastro}">
 						<h:outputText value="#{proponente.situacaoCadastro}" />
