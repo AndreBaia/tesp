@@ -16,26 +16,19 @@
 						<p:outputLabel value="Etapa Processo: " />
 						<p:inputText id="etapaProcesso" value="#{tramitacaomb.tramitacao.etapaProcesso}" size="50" />
 						<p:message for="etapaProcesso" errorClass="invalid" />			
+			            
 			            <p:outputLabel for="dataHora" value="Data e Hora: " />
-        				<p:calendar id="dataHora" value="#{tramitacaomb.tramitacao.dataHora}" pattern="MM/dd/yyyy HH:mm:ss" /><br /><br />
+        				<p:calendar id="dataHora" value="#{tramitacaomb.tramitacao.dataHora}" size="50" pattern="MM/dd/yyyy HH:mm:ss" /><br /><br />
+        				
         				<p:outputLabel for="situacaoInicial" value="Situacao Inicial " />
-				        <p:selectOneMenu id="situacaoInicial" value="#{tramitacaomb.tramitacao.situacaoInicial}">
-				        <p:outputLabel for="situacaoInicial" value="Situacao Inicial: " />
-				        <f:selectItem itemLabel="Ativo" itemValue="Ativo" />
-				        <f:selectItem itemLabel="Pendente" itemValue="Pendente" />
-				        <f:selectItem itemLabel="Inativo" itemValue="Inativo" />
-				        </p:selectOneMenu><br /><br />
+				        <p:inputText id="situacaoInicial" value="#{tramitacaomb.tramitacao.situacaoInicial}" size="50" /><br /><br />
+				        
 				        <p:outputLabel for="situacaoFinal" value="Situacao Final: " />
-				        <p:selectOneMenu id="situacaoFinal" value="#{tramitacaomb.tramitacao.situacaoFinal}">
-				        <f:selectItem itemLabel="Ativo" itemValue="Ativo" />
-				        <f:selectItem itemLabel="Pendente" itemValue="Pendente" />
-				        <f:selectItem itemLabel="Inativo" itemValue="Inativo" />
-				        </p:selectOneMenu><br /><br />
+				        <p:inputText id="situacaoFinal" value="#{tramitacaomb.tramitacao.situacaoFinal}" size="50" /><br /><br />
+				        
 				        <p:outputLabel for="tipoDecisao" value="Tipo Decisão: " />
-				        <p:selectOneMenu id="tipoDecisao" value="#{tramitacaomb.tramitacao.tipoDecisao}">
-				        <f:selectItem itemLabel="Aprovado" itemValue="Aprovado" />
-				        <f:selectItem itemLabel="Reprovado" itemValue="Reprovado" />
-				        </p:selectOneMenu><br /><br />
+				        <p:inputText id="tipoDecisao" value="#{tramitacaomb.tramitacao.tipoDecisao}" size="50" /><br /><br />
+				        
 				       	<p:outputLabel value="Comentários: " />
 						<p:inputText id="comentario" value="#{tramitacaomb.tramitacao.comentario}" size="50" />
 						<p:message for="comentario" errorClass="invalid" />			<br /><br />

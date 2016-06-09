@@ -8,10 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import br.unibh.seguros.util.CharacterToBooleanUtil;
@@ -20,6 +23,7 @@ import br.unibh.seguros.util.CharacterToBooleanUtil;
 
 @Entity
 @Table(name = "tb_questionario")
+@NamedQueries({ @NamedQuery(name = "Questionario.findByName", query = "select o from Questionario o where o.id like :id") })
 public class Questionario implements Serializable {
 	
 
@@ -37,7 +41,8 @@ public class Questionario implements Serializable {
 	public void setVersion(Long version) {
 	this.version = version;
 	}
-
+	
+	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
